@@ -51,4 +51,14 @@ public class BankTest {
         assertEquals(170.0, bank.totalInterestPaid(), DOUBLE_DELTA);
     }
 
+    @Test
+    public void getFirstCustomer(){
+    Bank bank = new Bank();
+        Customer custpmer = new Customer("Tom");
+        bank.addCustomer(customer);
+        assertEquals("Tom",bank.getFirstCustomer());
+    }
+
+    
+
 }
