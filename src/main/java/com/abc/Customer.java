@@ -60,6 +60,9 @@ public class Customer {
             case Account.MAXI_SAVINGS:
                 s += "Maxi Savings Account\n";
                 break;
+            case Account.SUPER_SAVINGS:
+                s += "Super Savings Account\n";
+                break;
         }
 
         //Now total up all the transactions
@@ -74,5 +77,14 @@ public class Customer {
 
     private String toDollars(double d){
         return String.format("$%,.2f", abs(d));
+    }
+
+    public void transfer(Account fromAccount, Account toAccount,double amount){
+        if(fromAccount.interestEarned() > = toAccount.interestEarned()){
+            fromAccount.withdraw(amount);
+            toAccount.deposit(amount);
+        }
+        else
+            throw new IllegalArgumentException("Unable to transfer funds");
     }
 }
