@@ -3,7 +3,7 @@ package com.abc;
 import org.junit.Ignore;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class CustomerTest {
 
@@ -53,5 +53,14 @@ public class CustomerTest {
                 .openAccount(new Account(Account.SAVINGS));
         oscar.openAccount(new Account(Account.CHECKING));
         assertEquals(3, oscar.getNumberOfAccounts());
+    }
+
+    @Test
+    public void testTransfer(){
+        Customer customer = new Customer("Tom");
+        
+        assertNotNull(customer.transfer(customer.openAccount(new Account(2).deposit(1000.0)),
+                                        customer.openAccount(new Account(3).deposit(1000.0)),500.0));
+        
     }
 }
