@@ -1,7 +1,7 @@
 package com.abc;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 
 import static java.lang.Math.abs;
 
@@ -28,10 +28,7 @@ public class Customer {
     }
 
     public double totalInterestEarned() {
-        double total = 0;
-        for (Account a : accounts)
-            total += a.interestEarned();
-        return total;
+          return accounts.stream().mapToDouble(Account:: interestEarned).sum();
     }
 
     public String getStatement() {
@@ -47,23 +44,14 @@ public class Customer {
     }
 
     private String statementForAccount(Account a) {
-        String s = "";
-
-       //Translate to pretty account type
-        switch(a.getAccountType()){
-            case Account.CHECKING:
-                s += "Checking Account\n";
-                break;
-            case Account.SAVINGS:
-                s += "Savings Account\n";
-                break;
-            case Account.MAXI_SAVINGS:
-                s += "Maxi Savings Account\n";
-                break;
-            case Account.SUPER_SAVINGS:
-                s += "Super Savings Account\n";
-                break;
-        }
+        String s  =" ";
+      Map<String,String> accountType  = new HashMap<>();
+      accountType.put(Account.CHECKING,"Checking Account");
+      accountType.put(Account.SAVINGS,"Savings Account");
+      accountType.put(Account.MAXI_SAVINGS,"Maxi Savings Account");
+      accountType.put(Account.SUPER_SAVINGS,"Super Savings Account");
+                
+        s+=" Account Type: " += accountType.get(a.getType())+" \n";
 
         //Now total up all the transactions
         double total = 0.0;
